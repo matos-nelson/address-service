@@ -1,4 +1,4 @@
-package org.property.management;
+package org.property.management.address;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
