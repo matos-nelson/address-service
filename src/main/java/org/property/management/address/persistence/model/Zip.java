@@ -1,8 +1,9 @@
 package org.property.management.address.persistence.model;
 
-import javax.persistence.EmbeddedId;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -16,8 +17,17 @@ import org.property.management.address.persistence.BaseModel;
 @Getter
 public class Zip extends BaseModel {
 
-    @EmbeddedId
-    private ZipId zipId;
+    @Id
+    private Long id;
+
+    @Column(name = "zip_code")
+    private String code;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state_id")
+    private Long stateId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "state_id", insertable = false, updatable = false)

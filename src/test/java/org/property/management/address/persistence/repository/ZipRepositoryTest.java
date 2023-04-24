@@ -13,7 +13,6 @@ import javax.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.property.management.address.persistence.model.State;
 import org.property.management.address.persistence.model.Zip;
-import org.property.management.address.persistence.model.ZipId;
 
 @QuarkusTest
 @QuarkusTestResource(H2DatabaseTestResource.class)
@@ -47,12 +46,11 @@ public class ZipRepositoryTest {
         state.setName("name");
         entityManager.persist(state);
 
-        ZipId id = new ZipId();
-        id.setCode("12345");
-        id.setCity("City");
-        id.setStateId(state.getId());
         Zip zip = new Zip();
-        zip.setZipId(id);
+        zip.setId(1L);
+        zip.setStateId(state.getId());
+        zip.setCode("12345");
+        zip.setCity("City");
         entityManager.persist(zip);
 
         // Act
@@ -60,7 +58,7 @@ public class ZipRepositoryTest {
 
         // Assert
         assertNotNull(result);
-        assertEquals(zip.getZipId().getCity(), result.getZipId().getCity());
-        assertEquals(zip.getZipId().getCode(), result.getZipId().getCode());
+        assertEquals(zip.getCity(), result.getCity());
+        assertEquals(zip.getCode(), result.getCode());
     }
 }
