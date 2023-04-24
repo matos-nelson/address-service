@@ -22,10 +22,12 @@ CREATE TABLE IF NOT EXISTS address (
   id int PRIMARY KEY AUTO_INCREMENT,
   address_1 varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   address_2 varchar(255) COLLATE utf8mb4_general_ci,
-  zip_id char(5) NOT NULL,
+  zip_code char(5) NOT NULL,
+  state_id int NOT NULL,
+  city varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (zip_id)
-    REFERENCES zip (zip_code)
+  FOREIGN KEY (zip_code, city, state_id)
+    REFERENCES zip (zip_code, city, state_id)
     ON UPDATE RESTRICT ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
