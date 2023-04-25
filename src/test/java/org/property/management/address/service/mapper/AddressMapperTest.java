@@ -7,8 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import io.quarkus.test.junit.QuarkusTest;
 import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
+import org.property.management.address.dto.AddressDto;
 import org.property.management.address.dto.SaveAddressDto;
 import org.property.management.address.persistence.model.Address;
+import org.property.management.address.persistence.model.State;
+import org.property.management.address.persistence.model.Zip;
 
 @QuarkusTest
 public class AddressMapperTest {
@@ -46,5 +49,47 @@ public class AddressMapperTest {
         assertNull(result.getId());
         assertEquals(saveAddressDto.getAddress1(), result.getAddress1());
         assertEquals(saveAddressDto.getAddress2(), result.getAddress2());
+    }
+
+    @Test
+    public void toDto_WhenGivenNull_ShouldReturnNull() {
+        // Arrange
+
+        // Act
+        AddressDto result = addressMapper.toDto(null);
+
+        // Assert
+        assertNull(result);
+    }
+
+    @Test
+    public void toDto_WhenGivenAnAddress_ShouldMap() {
+        // Arrange
+        State state = new State();
+        state.setId(1L);
+        state.setName("California");
+        state.setCode("CA");
+
+        Zip zip = new Zip();
+        zip.setState(state);
+        zip.setCity("San Marcos");
+        zip.setCode("90011");
+
+        Address address = new Address();
+        address.setId(1L);
+        address.setAddress1("Address 1");
+        address.setAddress2("Address 2");
+        address.setZip(zip);
+
+        // Act
+        AddressDto result = addressMapper.toDto(address);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(address.getAddress1(), result.getAddress1());
+        assertEquals(address.getAddress2(), result.getAddress2());
+        assertEquals(address.getZip().getCity(), result.getCity());
+        assertEquals(address.getZip().getCode(), result.getZipcode());
+        assertEquals(address.getZip().getState().getCode(), result.getStateCode());
     }
 }
