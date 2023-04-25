@@ -9,17 +9,12 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.h2.H2DatabaseTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
-import org.property.management.address.persistence.model.State;
 import org.property.management.address.persistence.model.Zip;
 
 @QuarkusTest
 @QuarkusTestResource(H2DatabaseTestResource.class)
 public class ZipRepositoryTest {
-
-    @Inject
-    EntityManager entityManager;
 
     @Inject
     ZipRepository zipRepository;
@@ -40,25 +35,15 @@ public class ZipRepositoryTest {
     @TestTransaction
     public void findByZipAndCity_WhenCalled_ShouldReturnZip() {
         // Arrange
-        State state = new State();
-        state.setId(1L);
-        state.setCode("AA");
-        state.setName("name");
-        entityManager.persist(state);
-
-        Zip zip = new Zip();
-        zip.setId(1L);
-        zip.setStateId(state.getId());
-        zip.setCode("12345");
-        zip.setCity("City");
-        entityManager.persist(zip);
+        String zipCode = "90001";
+        String city = "Los Angeles";
 
         // Act
-        Zip result = zipRepository.findByZipAndCity("12345", "City");
+        Zip result = zipRepository.findByZipAndCity(zipCode, city);
 
         // Assert
         assertNotNull(result);
-        assertEquals(zip.getCity(), result.getCity());
-        assertEquals(zip.getCode(), result.getCode());
+        assertEquals(city, result.getCity());
+        assertEquals(zipCode, result.getCode());
     }
 }

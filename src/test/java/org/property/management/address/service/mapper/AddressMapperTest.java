@@ -17,6 +17,17 @@ public class AddressMapperTest {
     AddressMapper addressMapper;
 
     @Test
+    public void toModel_WhenGivenNull_ShouldReturnNull() {
+        // Arrange
+
+        // Act
+        Address result = addressMapper.toModel(null);
+
+        // Assert
+        assertNull(result);
+    }
+
+    @Test
     public void toModel_WhenGivenASaveAddressDto_ShouldMap() {
         // Arrange
         SaveAddressDto saveAddressDto = SaveAddressDto.builder()
@@ -35,16 +46,5 @@ public class AddressMapperTest {
         assertNull(result.getId());
         assertEquals(saveAddressDto.getAddress1(), result.getAddress1());
         assertEquals(saveAddressDto.getAddress2(), result.getAddress2());
-    }
-
-    @Test
-    public void toModel_WhenGivenNull_ShouldReturnNull() {
-        // Arrange
-
-        // Act
-        Address result = addressMapper.toModel(null);
-
-        // Assert
-        assertNull(result);
     }
 }
