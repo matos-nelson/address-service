@@ -1,5 +1,8 @@
 import csv
 
+import os
+
+cur_path = os.path.dirname(__file__)
 
 with open('uszips.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -17,7 +20,8 @@ with open('uszips.csv') as csv_file:
     print(f'Processed {line_count} lines.')
 
     state_set = sorted(state_set)
-    state_file = open("states.sql", "w")
+    state_file_path = os.path.relpath('.\\sql\\states.sql', cur_path)
+    state_file = open(state_file_path, "w")
     for value in state_set:
         v = value.split(",")
         insert_state_sql = "INSERT INTO state(code, name) values ('" + v[0] + "', '" + v[1] + "');\n"
@@ -25,7 +29,8 @@ with open('uszips.csv') as csv_file:
     state_file.close()
 
     zip_set = sorted(zip_set)
-    zip_file = open("zips.sql", "w")
+    zip_file_path = os.path.relpath('.\\sql\\zips.sql', cur_path)
+    zip_file = open(zip_file_path, "w")
     for zip_info in zip_set:
         z = zip_info.split(",")
         insert_zip_sql = "INSERT INTO zip(zip_code, city, state_id) values ('" + z[0] + "', " + "\"" + z[1] + "\" , (select id from state where code = '" + z[2] + "' and name = '" + z[3] + "'));\n"

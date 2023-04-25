@@ -1,4 +1,4 @@
-package org.property.management;
+package org.property.management.address;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
