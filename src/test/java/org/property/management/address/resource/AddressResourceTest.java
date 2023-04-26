@@ -36,4 +36,35 @@ public class AddressResourceTest {
             .statusCode(200)
             .body(is("1"));
     }
+
+    @Test
+    public void Get_WhenAddressWithGivenIdExists_ShouldReturnAddressInfo() {
+        // Arrange
+
+        // Act
+        // Assert
+        given()
+            .when()
+            .get("/100")
+            .then()
+            .statusCode(200)
+            .body("address1", is("4800 E Interstate 440 Road"),
+                "address2", is("APT 1234"),
+                "zipcode", is("90001"),
+                "city", is("Los Angeles"),
+                "stateCode", is("CA"));
+    }
+
+    @Test
+    public void Get_WhenAddressWithGivenIdDoesNotExist_ShouldReturnNoContent() {
+        // Arrange
+
+        // Act
+        // Assert
+        given()
+            .when()
+            .get("/100000")
+            .then()
+            .statusCode(204);
+    }
 }

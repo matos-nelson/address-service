@@ -4,6 +4,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.ws.rs.BadRequestException;
 import lombok.AllArgsConstructor;
+import org.property.management.address.dto.AddressDto;
 import org.property.management.address.dto.SaveAddressDto;
 import org.property.management.address.persistence.model.Address;
 import org.property.management.address.persistence.model.Zip;
@@ -18,6 +19,12 @@ public class AddressService {
     private final ZipRepository zipRepository;
     private final AddressRepository addressRepository;
     private final AddressMapper addressMapper;
+
+    public AddressDto getAddress(Long addressId) {
+        Address address = addressRepository.findById(addressId);
+
+        return addressMapper.toDto(address);
+    }
 
     @Transactional
     public Long saveAddress(SaveAddressDto saveAddressDto) {

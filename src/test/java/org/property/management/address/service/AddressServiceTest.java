@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.property.management.address.dto.AddressDto;
 import org.property.management.address.dto.SaveAddressDto;
 import org.property.management.address.persistence.model.Address;
 import org.property.management.address.persistence.model.State;
@@ -104,5 +105,34 @@ public class AddressServiceTest {
         // Assert
         assertNotNull(result);
         assertEquals(address.getId(), result);
+    }
+
+    @Test
+    public void getAddress_WhenCalled_ShouldReturnAddress() {
+        // Arrange
+        State state = new State();
+        state.setCode("AA");
+
+        Zip zip = new Zip();
+        zip.setCode("12345");
+        zip.setCity("AAA-AA");
+        zip.setState(state);
+
+        Long addressId = 123L;
+        Address address = new Address();
+        address.setId(addressId);
+        address.setAddress1("address1");
+        address.setAddress2("address2");
+        address.setZip(zip);
+
+        AddressDto addressDto = new AddressDto();
+        when(addressRepository.findById(addressId)).thenReturn(address);
+        when(addressMapper.toDto(address)).thenReturn(addressDto);
+
+        // Act
+        AddressDto result = addressService.getAddress(address.getId());
+
+        // Assert
+        assertEquals(addressDto, result);
     }
 }

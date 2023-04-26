@@ -26,9 +26,6 @@ public class Zip extends BaseModel {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "state_id")
-    private Long stateId;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "state_id", insertable = false, updatable = false)
     private State state;
