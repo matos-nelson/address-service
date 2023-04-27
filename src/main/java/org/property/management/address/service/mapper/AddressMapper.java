@@ -2,8 +2,8 @@ package org.property.management.address.service.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.property.management.address.dto.AddressDto;
-import org.property.management.address.dto.SaveAddressDto;
+import org.property.management.address.dto.runtime.AddressDto;
+import org.property.management.address.dto.runtime.SaveAddressDto;
 import org.property.management.address.persistence.model.Address;
 
 @Mapper(componentModel = "cdi")

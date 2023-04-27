@@ -9,8 +9,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;
-import org.property.management.address.dto.AddressDto;
-import org.property.management.address.dto.SaveAddressDto;
+import org.property.management.address.dto.runtime.AddressDto;
+import org.property.management.address.dto.runtime.SaveAddressDto;
 import org.property.management.address.service.AddressService;
 
 @AllArgsConstructor

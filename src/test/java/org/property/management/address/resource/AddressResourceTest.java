@@ -8,7 +8,7 @@ import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.h2.H2DatabaseTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
-import org.property.management.address.dto.SaveAddressDto;
+import org.property.management.address.dto.runtime.SaveAddressDto;
 
 @QuarkusTest
 @TestHTTPEndpoint(AddressResource.class)

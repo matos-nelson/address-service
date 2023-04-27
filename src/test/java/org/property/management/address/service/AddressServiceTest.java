@@ -11,8 +11,8 @@ import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.property.management.address.dto.AddressDto;
-import org.property.management.address.dto.SaveAddressDto;
+import org.property.management.address.dto.runtime.AddressDto;
+import org.property.management.address.dto.runtime.SaveAddressDto;
 import org.property.management.address.persistence.model.Address;
 import org.property.management.address.persistence.model.State;
 import org.property.management.address.persistence.model.Zip;
@@ -41,9 +41,8 @@ public class AddressServiceTest {
         when(zipRepository.findByZipAndCity(Mockito.anyString(), Mockito.anyString())).thenReturn(null);
 
         // Act
-        Exception exception = assertThrows(BadRequestException.class, () -> {
-            addressService.saveAddress(new SaveAddressDto());
-        });
+        Exception exception = assertThrows(BadRequestException.class,
+            () -> addressService.saveAddress(new SaveAddressDto()));
 
         // Assert
         assertEquals("Given address information is not valid", exception.getMessage());
@@ -69,9 +68,7 @@ public class AddressServiceTest {
         when(zipRepository.findByZipAndCity(saveAddressDto.getZipcode(), saveAddressDto.getCity())).thenReturn(zip);
 
         // Act
-        Exception exception = assertThrows(BadRequestException.class, () -> {
-            addressService.saveAddress(saveAddressDto);
-        });
+        Exception exception = assertThrows(BadRequestException.class, () -> addressService.saveAddress(saveAddressDto));
 
         // Assert
         assertEquals("Given address information is not valid", exception.getMessage());
