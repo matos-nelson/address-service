@@ -30,7 +30,7 @@ jobs:
     - name: Setup settings.xml
       uses: s4u/maven-settings-action@v2.8.0
       with:
-        servers: '[{"id": "github", "username": "${{ secrets.USER_NAME }}", "password": "${{ secrets.READ_PACKAGES }}" }]'
+        servers: '[{"id": "github", "username": "${{ secrets.USER_NAME }}", "password": "${{ secrets.READ_PACKAGES }}", "snapshots": { "enabled" : "false" } }]'
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
