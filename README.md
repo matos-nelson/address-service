@@ -4,6 +4,12 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+## Environment Variables To Define
+A few environment variables need to be defined in order to run the application.
+- DB_USER: Username for database
+- DB_PWD: Password for user
+- DB_URL: Url for database
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
@@ -47,8 +53,20 @@ You can then execute your native executable with: `./target/address-service-1.0.
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
-## Related Guides
+## Creating a docker image containing native executable
 
+You can create a native executable using:
+```shell script
+./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
+```
+
+You can create a docker image using:
+```shell script
+docker build -f src/main/docker/Dockerfile.native-micro -t quarkus/address-service .
+```
+
+## Related Guides
+https://quarkus.io/guides/building-native-image#creating-a-container
 
 ## Provided Code
 
