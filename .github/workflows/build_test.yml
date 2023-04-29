@@ -28,7 +28,7 @@ jobs:
         distribution: 'corretto'
         cache: maven
     - name: Setup settings.xml
-    - uses: s4u/maven-settings-action@v2.8.0
+      uses: s4u/maven-settings-action@v2.8.0
       with:
         servers: '[{"id": "github", "username": "${{ secrets.USER_NAME }}", "password": "${{ secrets.READ_PACKAGES }}" }]'
     - name: Build with Maven
