@@ -22,6 +22,7 @@ jobs:
     steps:
     - name: 'Create settings.xml'
       run: |
+        mkdir ~/.m2
         touch ~/.m2/settings.xml
         echo '<settings><servers><server><id>github</id><username>${{ secrets.USER_NAME }}</username><password>${{ secrets.READ_PACKAGES }}</password></server></servers></settings>' > ~/.m2/settings.xml
     - uses: actions/checkout@v3
