@@ -61,7 +61,7 @@ jobs:
         repositories: '[{ "id": "github", "url": "${{ secrets.REPOSITORY_URL }}",  "snapshots": { "enabled" : "true" } }]'
         servers: '[{"id": "github", "username": "${{ secrets.USER_NAME }}", "password": "${{ secrets.READ_PACKAGES }}" }]'
     - name: Install Packages
-      run: mvn clean install
+      run: mvn clean install -DskipTests
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
