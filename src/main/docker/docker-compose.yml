@@ -1,0 +1,32 @@
+version: '3.8'
+
+name: address-container
+services:
+  app:
+    image: 'quarkus/address-service'
+    container_name: "address-app"
+    ports:
+      - '8080:8080'
+    links:
+      - "mysql-db"
+    environment:
+      - DB_USER=root
+      - DB_PWD=root
+      - DB_URL=jdbc:mysql://mysql-db/db
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: "mysql-db"
+    environment:
+      - MYSQL_DATABASE=db
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+      - ./../../../db/sql/create_address_schemas.sql:/docker-entrypoint-initdb.d/create_address_schemas.sql
+      - ./../../../db/sql/states.sql:/docker-entrypoint-initdb.d/states.sql
+      - ./../../../db/sql/zips.sql:/docker-entrypoint-initdb.d/zips.sql
+volumes:
+  db:
+    driver: local

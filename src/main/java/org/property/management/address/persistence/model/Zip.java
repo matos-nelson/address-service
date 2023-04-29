@@ -9,12 +9,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.property.management.address.persistence.BaseModel;
 
 @Entity
 @Table(name = "zip")
 @Setter
 @Getter
+@ToString
 public class Zip extends BaseModel {
 
     @Id
