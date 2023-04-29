@@ -54,6 +54,14 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
+    - name: Setup Github Maven Packages Settings
+      uses: whelk-io/maven-settings-xml-action@v20
+      with:
+        active_profiles: '["github"]'
+        repositories: '[{ "id": "github", "url": "${{ secrets.REPOSITORY_URL }}",  "snapshots": { "enabled" : "true" } }]'
+        servers: '[{"id": "github", "username": "${{ secrets.USER_NAME }}", "password": "${{ secrets.READ_PACKAGES }}" }]'
+    - name: Install Packages
+      run: mvn clean install
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
