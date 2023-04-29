@@ -30,8 +30,8 @@ jobs:
     - name: Setup Github Maven Packages Settings
       uses: whelk-io/maven-settings-xml-action@v20
       with:
-        activeProfiles: '[{ "activeProfile": "github" }]'
-        repositories: '[{ "id": "github", "url": "${{ secrets.REPOSITORY_URL }}",  "snapshots": { "enabled" : "true" } }, {"id": "github", "url": "https://repo1.maven.org/maven2" } ]'
+        active_profiles: '[{ "activeProfile": "github" }]'
+        repositories: '[{ "id": "github", "url": "${{ secrets.REPOSITORY_URL }}",  "snapshots": { "enabled" : "true" } }]'
         servers: '[{"id": "github", "username": "${{ secrets.USER_NAME }}", "password": "${{ secrets.READ_PACKAGES }}" }]'
     - name: Build with Maven
       run: mvn -B package --file pom.xml
