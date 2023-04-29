@@ -6,12 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.property.management.address.persistence.BaseModel;
 
 @Entity
 @Table(name = "state")
 @Setter
 @Getter
+@ToString
 public class State extends BaseModel {
 
     @Id

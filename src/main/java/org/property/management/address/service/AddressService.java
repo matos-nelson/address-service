@@ -32,8 +32,7 @@ public class AddressService {
     public Long saveAddress(SaveAddressDto saveAddressDto) {
         Zip zip = zipRepository.findByZipAndCity(saveAddressDto.getZipcode(), saveAddressDto.getCity());
         if (zip == null || !zip.getState().getCode().equalsIgnoreCase(saveAddressDto.getStateCode())) {
-            log.error("Zip is not valid. Zip: {} Given ZipCode: {} Given City: {}", zip, saveAddressDto.getZipcode(),
-                saveAddressDto.getCity());
+            log.error("Zip is not valid. Zip: {} Given Info: {}", zip, saveAddressDto);
             throw new BadRequestException("Given address information is not valid");
         }
 
