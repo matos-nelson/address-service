@@ -27,14 +27,11 @@ jobs:
         java-version: '11'
         distribution: 'corretto'
         cache: maven
-    - name: Install Maven Packages
-      run: mvn clean install
     - name: Setup Github Maven Packages Settings
-      uses: s4u/maven-settings-action@v2.8.0
+      uses: whelk-io/maven-settings-xml-action@v20
       with:
-        servers: '[{"id": "github", "username": "${{ secrets.USER_NAME }}", "password": "${{ secrets.READ_PACKAGES }}", "snapshots": { "enabled" : "false" } }]'
-    - name: Install Github Maven Packages
-      run: mvn install
+        repositories: '[{ "id": "github", "url": "${{ secrets.REPOSITORY_URL }}",  "snapshots": { "enabled" : "true" } }, {"id": "github", "url": "https://repo1.maven.org/maven2" } ]'
+        servers: '[{"id": "github", "username": "${{ secrets.USER_NAME }}", "password": "${{ secrets.READ_PACKAGES }}" }]'
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
