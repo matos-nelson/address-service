@@ -2,7 +2,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.property.management</groupId>
+  <groupId>org.rent.circle</groupId>
   <artifactId>address-service</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <properties>
@@ -60,7 +60,7 @@
       <version>1.3.1.Final</version>
     </dependency>
     <dependency>
-      <groupId>org.property.management</groupId>
+      <groupId>org.rent.circle</groupId>
       <artifactId>address-dto</artifactId>
       <version>1.0.2</version>
     </dependency>
