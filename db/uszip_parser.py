@@ -9,11 +9,12 @@ with open('uszips.csv') as csv_file:
     line_count = 0
     state_set = set()
     zip_set = set()
+    unsupported_states = ['AS', 'DC', 'GU', 'MP', 'PR', 'VI']
     for row in csv_reader:
         if line_count == 0:
             print(f'Column names are {", ".join(row)}')
             line_count += 1
-        else:
+        elif row[4] not in unsupported_states:
             zip_set.add(row[0] + "," + row[3] + "," + row[4] + "," + row[5])
             state_set.add(row[4] + "," + row[5])
             line_count += 1
