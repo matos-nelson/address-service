@@ -14,9 +14,7 @@ CREATE TABLE IF NOT EXISTS zip (
   created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   UNIQUE KEY unique_zip (code, state_id, city),
-  FOREIGN KEY (state_id)
-    REFERENCES state (id)
-    ON UPDATE RESTRICT ON DELETE CASCADE
+  KEY state_id_idx (state_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE IF NOT EXISTS address (
@@ -26,7 +24,5 @@ CREATE TABLE IF NOT EXISTS address (
   zip_id bigint NOT NULL,
   created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (zip_id)
-    REFERENCES zip (id)
-    ON UPDATE RESTRICT ON DELETE CASCADE
+  KEY zip_id_idx (zip_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

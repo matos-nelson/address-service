@@ -34,6 +34,6 @@ with open('uszips.csv') as csv_file:
     zip_file = open(zip_file_path, "w")
     for zip_info in zip_set:
         z = zip_info.split(",")
-        insert_zip_sql = "INSERT INTO zip(zip_code, city, state_id) values ('" + z[0] + "', " + "\"" + z[1] + "\" , (select id from state where code = '" + z[2] + "' and name = '" + z[3] + "'));\n"
+        insert_zip_sql = "INSERT INTO zip(code, city, state_id) values ('" + z[0] + "', " + "\"" + z[1] + "\" , (select id from state where code = '" + z[2] + "' and name = '" + z[3] + "'));\n"
         zip_file.write(insert_zip_sql)
     zip_file.close()
