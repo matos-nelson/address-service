@@ -10,6 +10,6 @@ public class ZipRepository implements PanacheRepository<Zip> {
 
     public Zip findByZipAndCity(String zip, String city) {
         Parameters queryParams = Parameters.with("zip", zip).and("city", city);
-        return find("zip_code = :zip and upper(city) = upper(:city)", queryParams).firstResult();
+        return find("code = :zip and upper(city) = upper(:city)", queryParams).firstResult();
     }
 }

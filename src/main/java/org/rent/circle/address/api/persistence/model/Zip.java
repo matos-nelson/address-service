@@ -22,7 +22,7 @@ public class Zip extends BaseModel {
     @Id
     private Long id;
 
-    @Column(name = "zip_code")
+    @Column(name = "code")
     private String code;
 
     @Column(name = "city")

@@ -49,7 +49,7 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 ./mvnw package -Pnative -Dquarkus.native.container-build=true
 ```
 
-You can then execute your native executable with: `./target/address-service-1.0.0-SNAPSHOT-runner`
+You can then execute your native executable with: `./target/address-service-1.0.0-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
@@ -65,8 +65,26 @@ You can create a docker image using:
 docker build -f src/main/docker/Dockerfile.native-micro -t quarkus/address-service .
 ```
 
+## Creating native executable to deploy to AWS
+
+To deploy a native executable, you must build it with GraalVM:
+```shell script
+./mvnw install -Dnative -DskipTests -Dquarkus.native.container-build=true
+```
+
+You can then test the executable locally with sam local:
+```shell script
+sam local start-api --template target/sam.native.yaml.
+```
+
+To deploy to AWS Lambda:
+```shell script
+sam deploy -t target/sam.native.yaml -g
+```
+
 ## Related Guides
-https://quarkus.io/guides/building-native-image#creating-a-container
+- Containers https://quarkus.io/guides/building-native-image#creating-a-container
+- AWS Lambda Gateway REST API ([guide](https://quarkus.io/guides/amazon-lambda-http)): Build/Run an API Gateway REST API with Lambda integration
 
 ## Provided Code
 
