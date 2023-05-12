@@ -7,8 +7,8 @@ import static org.mockito.Mockito.when;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
-import javax.inject.Inject;
-import javax.ws.rs.BadRequestException;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.BadRequestException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.rent.circle.address.api.persistence.model.Address;

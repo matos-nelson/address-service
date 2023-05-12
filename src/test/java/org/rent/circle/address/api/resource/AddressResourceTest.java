@@ -20,9 +20,9 @@ public class AddressResourceTest {
         // Arrange
         SaveAddressDto saveAddressDto = SaveAddressDto.builder()
             .address1("My address")
-            .zipcode("90001")
-            .city("Los Angeles")
-            .stateCode("CA")
+            .zipcode("80210")
+            .city("Denver")
+            .stateCode("CO")
             .build();
 
         // Act

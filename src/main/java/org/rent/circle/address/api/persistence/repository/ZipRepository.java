@@ -2,7 +2,7 @@ package org.rent.circle.address.api.persistence.repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.panache.common.Parameters;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import org.rent.circle.address.api.persistence.model.Zip;
 
 @ApplicationScoped

@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS state (
   id bigint PRIMARY KEY AUTO_INCREMENT,
-  code char(2) NOT NULL,
+  code varchar(2) NOT NULL,
   name varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS state (
 
 CREATE TABLE IF NOT EXISTS zip (
   id bigint PRIMARY KEY AUTO_INCREMENT,
-  code char(5) NOT NULL,
+  code varchar(5) NOT NULL,
   state_id bigint NOT NULL,
   city varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
