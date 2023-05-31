@@ -9,6 +9,9 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.BadRequestException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.rent.circle.address.api.persistence.model.Address;
@@ -131,5 +134,39 @@ public class AddressServiceTest {
 
         // Assert
         assertEquals(addressDto, result);
+    }
+
+    @Test
+    public void getAddresses_WhenCalled_ShouldReturnAddresses() {
+        // Arrange
+        State state = new State();
+        state.setCode("AA");
+
+        Zip zip = new Zip();
+        zip.setCode("12345");
+        zip.setCity("AAA-AA");
+        zip.setState(state);
+
+        Long addressId = 123L;
+        Address address = new Address();
+        address.setId(addressId);
+        address.setAddress1("address1");
+        address.setAddress2("address2");
+        address.setZip(zip);
+
+        List<Address> addresses = new ArrayList<>();
+        addresses.add(address);
+
+        AddressDto addressDto = new AddressDto();
+        when(addressRepository.getAll(Collections.singletonList(addressId))).thenReturn(addresses);
+        when(addressMapper.toDtoList(addresses)).thenReturn(Collections.singletonList(addressDto));
+
+        // Act
+        List<AddressDto> result = addressService.getAllAddresses(Collections.singletonList(addressId));
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(addressDto, result.get(0));
     }
 }

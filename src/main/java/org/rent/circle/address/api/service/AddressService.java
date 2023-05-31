@@ -3,6 +3,7 @@ package org.rent.circle.address.api.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.BadRequestException;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.rent.circle.address.api.persistence.model.Address;
@@ -24,8 +25,12 @@ public class AddressService {
 
     public AddressDto getAddress(Long addressId) {
         Address address = addressRepository.findById(addressId);
-
         return addressMapper.toDto(address);
+    }
+
+    public List<AddressDto> getAllAddresses(List<Long> addressIds) {
+        List<Address> addresses = addressRepository.getAll(addressIds);
+        return addressMapper.toDtoList(addresses);
     }
 
     @Transactional
