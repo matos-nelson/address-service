@@ -1,5 +1,6 @@
 package org.rent.circle.address.api.service.mapper;
 
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.rent.circle.address.api.persistence.model.Address;
@@ -15,4 +16,6 @@ public interface AddressMapper {
     @Mapping(target = "city", source = "address.zip.city")
     @Mapping(target = "stateCode", source = "address.zip.state.code")
     AddressDto toDto(Address address);
+
+    List<AddressDto> toDtoList(List<Address> addresses);
 }

@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
+import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.rent.circle.address.api.persistence.model.Address;
 import org.rent.circle.address.api.persistence.model.State;
@@ -91,5 +93,48 @@ public class AddressMapperTest {
         assertEquals(address.getZip().getCity(), result.getCity());
         assertEquals(address.getZip().getCode(), result.getZipcode());
         assertEquals(address.getZip().getState().getCode(), result.getStateCode());
+    }
+
+    @Test
+    public void toDtoList_WhenGivenNull_ShouldReturnNull() {
+        // Arrange
+
+        // Act
+        List<AddressDto> result = addressMapper.toDtoList(null);
+
+        // Assert
+        assertNull(result);
+    }
+
+    @Test
+    public void toDtoList_WhenGivenAnAddressList_ShouldMap() {
+        // Arrange
+        State state = new State();
+        state.setId(1L);
+        state.setName("California");
+        state.setCode("CA");
+
+        Zip zip = new Zip();
+        zip.setState(state);
+        zip.setCity("San Marcos");
+        zip.setCode("90011");
+
+        Address address = new Address();
+        address.setId(1L);
+        address.setAddress1("Address 1");
+        address.setAddress2("Address 2");
+        address.setZip(zip);
+
+        // Act
+        List<AddressDto> result = addressMapper.toDtoList(Collections.singletonList(address));
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(address.getAddress1(), result.get(0).getAddress1());
+        assertEquals(address.getAddress2(), result.get(0).getAddress2());
+        assertEquals(address.getZip().getCity(), result.get(0).getCity());
+        assertEquals(address.getZip().getCode(), result.get(0).getZipcode());
+        assertEquals(address.getZip().getState().getCode(), result.get(0).getStateCode());
     }
 }
