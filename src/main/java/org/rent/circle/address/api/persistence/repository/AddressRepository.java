@@ -10,15 +10,17 @@ import org.rent.circle.address.api.persistence.model.Address;
 public class AddressRepository implements PanacheRepository<Address> {
 
     public Address findAddress(String address1, String address2, Long zipId) {
-        Parameters queryParams = Parameters.with("address1", address1)
-            .and("address2", address2)
-            .and("zipId", zipId);
+        StringBuilder sb = new StringBuilder(
+            "FROM Address a JOIN Zip z ON a.zip.id = z.id WHERE a.zip.id = :zipId and a.address1 = :address1");
+        Parameters queryParams = Parameters.with("address1", address1).and("zipId", zipId);
+        if (address2 == null) {
+            sb.append(" and address2 is null");
+        } else {
+            queryParams = queryParams.and("address2", address2);
+            sb.append(" and a.address2 =:address2");
+        }
 
-        return find("FROM Address a "
-            + "JOIN Zip z "
-            + "ON a.zip.id = z.id "
-            + "WHERE a.zip.id = :zipId and a.address1 = :address1 and a.address2 =:address2", queryParams)
-            .firstResult();
+        return find(sb.toString(), queryParams).firstResult();
     }
 
     public List<Address> getAll(List<Long> ids) {

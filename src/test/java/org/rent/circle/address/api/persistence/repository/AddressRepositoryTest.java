@@ -36,6 +36,39 @@ public class AddressRepositoryTest {
 
     @Test
     @TestTransaction
+    public void findAddress_WhenAddressHasANullAddress2ValueAndDoesNotExist_ShouldReturnNull() {
+        // Arrange
+
+        // Act
+        Address result = addressRepository.findAddress("1234 Main St", null, 3L);
+
+        // Assert
+        assertNull(result);
+    }
+
+    @Test
+    @TestTransaction
+    public void findAddress_WhenAddressHasANullAddress2ValueAndExists_ShouldReturnAddress() {
+        // Arrange
+
+        // Act
+        Address result = addressRepository.findAddress("1234 Main Rd", null, 3L);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals("1234 Main Rd", result.getAddress1());
+        assertNull(result.getAddress2());
+        assertEquals(200L, result.getId());
+        assertEquals(3L, result.getZip().getId());
+        assertEquals("75051", result.getZip().getCode());
+        assertEquals("Dallas", result.getZip().getCity());
+        assertEquals(3L, result.getZip().getState().getId());
+        assertEquals("Texas", result.getZip().getState().getName());
+        assertEquals("TX", result.getZip().getState().getCode());
+    }
+
+    @Test
+    @TestTransaction
     public void findAddress_WhenCalled_ShouldReturnAddress() {
         // Arrange
 
