@@ -78,6 +78,37 @@ public class AddressServiceTest {
     }
 
     @Test
+    public void saveAddress_WhenAddressAlreadyExists_ShouldReturnExistingAddress() {
+        // Arrange
+        State state = new State();
+        state.setCode("AA");
+
+        Zip zip = new Zip();
+        zip.setCode("12345");
+        zip.setCity("AAA-AA");
+        zip.setState(state);
+
+        SaveAddressDto saveAddressDto = SaveAddressDto.builder()
+            .zipcode(zip.getCode())
+            .city(zip.getCity())
+            .stateCode(zip.getState().getCode())
+            .build();
+
+        Address address = new Address();
+        address.setId(123L);
+        when(zipRepository.findByZipAndCity(saveAddressDto.getZipcode(), saveAddressDto.getCity())).thenReturn(zip);
+        when(addressRepository.findAddress(saveAddressDto.getAddress1(), saveAddressDto.getAddress2(),
+            zip.getId())).thenReturn(address);
+
+        // Act
+        Long result = addressService.saveAddress(saveAddressDto);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(address.getId(), result);
+    }
+
+    @Test
     public void saveAddress_WhenCalled_ShouldReturnAddress() {
         // Arrange
         State state = new State();
@@ -97,6 +128,8 @@ public class AddressServiceTest {
         Address address = new Address();
         address.setId(123L);
         when(zipRepository.findByZipAndCity(saveAddressDto.getZipcode(), saveAddressDto.getCity())).thenReturn(zip);
+        when(addressRepository.findAddress(saveAddressDto.getAddress1(), saveAddressDto.getAddress2(),
+            zip.getId())).thenReturn(null);
         when(addressMapper.toModel(saveAddressDto)).thenReturn(address);
 
         // Act

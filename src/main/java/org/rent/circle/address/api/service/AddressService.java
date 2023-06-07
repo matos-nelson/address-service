@@ -41,7 +41,13 @@ public class AddressService {
             throw new BadRequestException("Given address information is not valid");
         }
 
-        Address address = addressMapper.toModel(saveAddressDto);
+        Address address = addressRepository.findAddress(saveAddressDto.getAddress1(), saveAddressDto.getAddress2(),
+            zip.getId());
+        if (address != null) {
+            return address.getId();
+        }
+
+        address = addressMapper.toModel(saveAddressDto);
         address.setZip(zip);
 
         addressRepository.persist(address);

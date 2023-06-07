@@ -2,6 +2,7 @@ package org.rent.circle.address.api.persistence.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.common.QuarkusTestResource;
@@ -20,6 +21,72 @@ public class AddressRepositoryTest {
 
     @Inject
     AddressRepository addressRepository;
+
+    @Test
+    @TestTransaction
+    public void findAddress_WhenNotFound_ShouldReturnNull() {
+        // Arrange
+
+        // Act
+        Address result = addressRepository.findAddress("480", "APT 1234", 1L);
+
+        // Assert
+        assertNull(result);
+    }
+
+    @Test
+    @TestTransaction
+    public void findAddress_WhenAddressHasANullAddress2ValueAndDoesNotExist_ShouldReturnNull() {
+        // Arrange
+
+        // Act
+        Address result = addressRepository.findAddress("1234 Main St", null, 3L);
+
+        // Assert
+        assertNull(result);
+    }
+
+    @Test
+    @TestTransaction
+    public void findAddress_WhenAddressHasANullAddress2ValueAndExists_ShouldReturnAddress() {
+        // Arrange
+
+        // Act
+        Address result = addressRepository.findAddress("1234 Main Rd", null, 3L);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals("1234 Main Rd", result.getAddress1());
+        assertNull(result.getAddress2());
+        assertEquals(200L, result.getId());
+        assertEquals(3L, result.getZip().getId());
+        assertEquals("75051", result.getZip().getCode());
+        assertEquals("Dallas", result.getZip().getCity());
+        assertEquals(3L, result.getZip().getState().getId());
+        assertEquals("Texas", result.getZip().getState().getName());
+        assertEquals("TX", result.getZip().getState().getCode());
+    }
+
+    @Test
+    @TestTransaction
+    public void findAddress_WhenCalled_ShouldReturnAddress() {
+        // Arrange
+
+        // Act
+        Address result = addressRepository.findAddress("4800 E Interstate 440 Road", "APT 1234", 1L);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals("4800 E Interstate 440 Road", result.getAddress1());
+        assertEquals("APT 1234", result.getAddress2());
+        assertEquals(100L, result.getId());
+        assertEquals(1L, result.getZip().getId());
+        assertEquals("90001", result.getZip().getCode());
+        assertEquals("Los Angeles", result.getZip().getCity());
+        assertEquals(1L, result.getZip().getState().getId());
+        assertEquals("California", result.getZip().getState().getName());
+        assertEquals("CA", result.getZip().getState().getCode());
+    }
 
     @Test
     @TestTransaction
