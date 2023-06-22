@@ -41,7 +41,7 @@ public class AddressService {
             throw new BadRequestException("Given address information is not valid");
         }
 
-        Address address = addressRepository.findAddress(saveAddressDto.getAddress1(), saveAddressDto.getAddress2(),
+        Address address = addressRepository.findAddress(saveAddressDto.getStreet1(), saveAddressDto.getStreet2(),
             zip.getId());
         if (address != null) {
             return address.getId();

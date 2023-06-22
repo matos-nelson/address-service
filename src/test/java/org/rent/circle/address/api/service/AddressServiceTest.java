@@ -97,7 +97,7 @@ public class AddressServiceTest {
         Address address = new Address();
         address.setId(123L);
         when(zipRepository.findByZipAndCity(saveAddressDto.getZipcode(), saveAddressDto.getCity())).thenReturn(zip);
-        when(addressRepository.findAddress(saveAddressDto.getAddress1(), saveAddressDto.getAddress2(),
+        when(addressRepository.findAddress(saveAddressDto.getStreet1(), saveAddressDto.getStreet2(),
             zip.getId())).thenReturn(address);
 
         // Act
@@ -128,7 +128,7 @@ public class AddressServiceTest {
         Address address = new Address();
         address.setId(123L);
         when(zipRepository.findByZipAndCity(saveAddressDto.getZipcode(), saveAddressDto.getCity())).thenReturn(zip);
-        when(addressRepository.findAddress(saveAddressDto.getAddress1(), saveAddressDto.getAddress2(),
+        when(addressRepository.findAddress(saveAddressDto.getStreet1(), saveAddressDto.getStreet2(),
             zip.getId())).thenReturn(null);
         when(addressMapper.toModel(saveAddressDto)).thenReturn(address);
 
@@ -154,8 +154,8 @@ public class AddressServiceTest {
         Long addressId = 123L;
         Address address = new Address();
         address.setId(addressId);
-        address.setAddress1("address1");
-        address.setAddress2("address2");
+        address.setStreet1("street1");
+        address.setStreet2("street2");
         address.setZip(zip);
 
         AddressDto addressDto = new AddressDto();
@@ -183,8 +183,8 @@ public class AddressServiceTest {
         Long addressId = 123L;
         Address address = new Address();
         address.setId(addressId);
-        address.setAddress1("address1");
-        address.setAddress2("address2");
+        address.setStreet1("street1");
+        address.setStreet2("street2");
         address.setZip(zip);
 
         List<Address> addresses = new ArrayList<>();

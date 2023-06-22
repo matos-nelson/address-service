@@ -36,7 +36,7 @@ public class AddressRepositoryTest {
 
     @Test
     @TestTransaction
-    public void findAddress_WhenAddressHasANullAddress2ValueAndDoesNotExist_ShouldReturnNull() {
+    public void findAddress_WhenAddressHasANullStreet2ValueAndDoesNotExist_ShouldReturnNull() {
         // Arrange
 
         // Act
@@ -48,7 +48,7 @@ public class AddressRepositoryTest {
 
     @Test
     @TestTransaction
-    public void findAddress_WhenAddressHasANullAddress2ValueAndExists_ShouldReturnAddress() {
+    public void findAddress_WhenAddressHasANullStreet2ValueAndExists_ShouldReturnAddress() {
         // Arrange
 
         // Act
@@ -56,8 +56,8 @@ public class AddressRepositoryTest {
 
         // Assert
         assertNotNull(result);
-        assertEquals("1234 Main Rd", result.getAddress1());
-        assertNull(result.getAddress2());
+        assertEquals("1234 Main Rd", result.getStreet1());
+        assertNull(result.getStreet2());
         assertEquals(200L, result.getId());
         assertEquals(3L, result.getZip().getId());
         assertEquals("75051", result.getZip().getCode());
@@ -77,8 +77,8 @@ public class AddressRepositoryTest {
 
         // Assert
         assertNotNull(result);
-        assertEquals("4800 E Interstate 440 Road", result.getAddress1());
-        assertEquals("APT 1234", result.getAddress2());
+        assertEquals("4800 E Interstate 440 Road", result.getStreet1());
+        assertEquals("APT 1234", result.getStreet2());
         assertEquals(100L, result.getId());
         assertEquals(1L, result.getZip().getId());
         assertEquals("90001", result.getZip().getCode());

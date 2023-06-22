@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS zip (
 
 CREATE TABLE IF NOT EXISTS address (
   id bigint PRIMARY KEY AUTO_INCREMENT,
-  address_1 varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  address_2 varchar(255) COLLATE utf8mb4_general_ci,
+  street_1 varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  street_2 varchar(255) COLLATE utf8mb4_general_ci,
   zip_id bigint NOT NULL,
   created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

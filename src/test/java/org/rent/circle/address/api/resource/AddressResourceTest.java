@@ -25,7 +25,7 @@ public class AddressResourceTest {
     public void Post_WhenGivenValidAddressToSave_ShouldReturnSavedAddress() {
         // Arrange
         SaveAddressDto saveAddressDto = SaveAddressDto.builder()
-            .address1("My address")
+            .street1("My address")
             .zipcode("80210")
             .city("Denver")
             .stateCode("CO")
@@ -54,8 +54,8 @@ public class AddressResourceTest {
             .get("/100")
             .then()
             .statusCode(200)
-            .body("address1", is("4800 E Interstate 440 Road"),
-                "address2", is("APT 1234"),
+            .body("street1", is("4800 E Interstate 440 Road"),
+                "street2", is("APT 1234"),
                 "zipcode", is("90001"),
                 "city", is("Los Angeles"),
                 "stateCode", is("CA"));
@@ -92,8 +92,8 @@ public class AddressResourceTest {
         // Assert
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertEquals("4800 E Interstate 440 Road", result.get(0).getAddress1());
-        assertEquals("APT 1234", result.get(0).getAddress2());
+        assertEquals("4800 E Interstate 440 Road", result.get(0).getStreet1());
+        assertEquals("APT 1234", result.get(0).getStreet2());
         assertEquals("90001", result.get(0).getZipcode());
         assertEquals("Los Angeles", result.get(0).getCity());
         assertEquals("CA", result.get(0).getStateCode());
