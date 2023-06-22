@@ -25,11 +25,11 @@ public class Address extends BaseModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "address_1")
-    private String address1;
+    @Column(name = "street_1")
+    private String street1;
 
-    @Column(name = "address_2")
-    private String address2;
+    @Column(name = "street_2")
+    private String street2;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "zip_id", updatable = false)

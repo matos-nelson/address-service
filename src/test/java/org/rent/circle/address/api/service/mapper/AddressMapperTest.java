@@ -36,8 +36,8 @@ public class AddressMapperTest {
     public void toModel_WhenGivenASaveAddressDto_ShouldMap() {
         // Arrange
         SaveAddressDto saveAddressDto = SaveAddressDto.builder()
-            .address1("address_1")
-            .address2("address_2")
+            .street1("street_1")
+            .street2("street_2")
             .city("City")
             .zipcode("12345")
             .stateCode("AA")
@@ -49,8 +49,8 @@ public class AddressMapperTest {
         // Assert
         assertNotNull(result);
         assertNull(result.getId());
-        assertEquals(saveAddressDto.getAddress1(), result.getAddress1());
-        assertEquals(saveAddressDto.getAddress2(), result.getAddress2());
+        assertEquals(saveAddressDto.getStreet1(), result.getStreet1());
+        assertEquals(saveAddressDto.getStreet2(), result.getStreet2());
     }
 
     @Test
@@ -79,8 +79,8 @@ public class AddressMapperTest {
 
         Address address = new Address();
         address.setId(1L);
-        address.setAddress1("Address 1");
-        address.setAddress2("Address 2");
+        address.setStreet1("Address 1");
+        address.setStreet2("Address 2");
         address.setZip(zip);
 
         // Act
@@ -88,8 +88,8 @@ public class AddressMapperTest {
 
         // Assert
         assertNotNull(result);
-        assertEquals(address.getAddress1(), result.getAddress1());
-        assertEquals(address.getAddress2(), result.getAddress2());
+        assertEquals(address.getStreet1(), result.getStreet1());
+        assertEquals(address.getStreet2(), result.getStreet2());
         assertEquals(address.getZip().getCity(), result.getCity());
         assertEquals(address.getZip().getCode(), result.getZipcode());
         assertEquals(address.getZip().getState().getCode(), result.getStateCode());
@@ -121,8 +121,8 @@ public class AddressMapperTest {
 
         Address address = new Address();
         address.setId(1L);
-        address.setAddress1("Address 1");
-        address.setAddress2("Address 2");
+        address.setStreet1("Address 1");
+        address.setStreet2("Address 2");
         address.setZip(zip);
 
         // Act
@@ -131,8 +131,8 @@ public class AddressMapperTest {
         // Assert
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertEquals(address.getAddress1(), result.get(0).getAddress1());
-        assertEquals(address.getAddress2(), result.get(0).getAddress2());
+        assertEquals(address.getStreet1(), result.get(0).getStreet1());
+        assertEquals(address.getStreet2(), result.get(0).getStreet2());
         assertEquals(address.getZip().getCity(), result.get(0).getCity());
         assertEquals(address.getZip().getCode(), result.get(0).getZipcode());
         assertEquals(address.getZip().getState().getCode(), result.get(0).getStateCode());
