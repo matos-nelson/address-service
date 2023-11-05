@@ -8,25 +8,25 @@ services:
     ports:
       - '8080:8080'
     links:
-      - "mysql-db"
+      - "address-db"
     environment:
       - DB_USER=root
       - DB_PWD=root
-      - DB_URL=jdbc:mysql://mysql-db/db
+      - DB_URL=jdbc:mysql://mysql-db/address
 
-  mysql-db:
+  address-db:
     image: mysql:8.0
-    container_name: "mysql-db"
+    container_name: "address-db"
     environment:
-      - MYSQL_DATABASE=db
+      - MYSQL_DATABASE=address
       - MYSQL_ROOT_PASSWORD=root
     ports:
       - '3306:3306'
     volumes:
-      - db:/var/lib/mysql
+      - address:/var/lib/mysql
       - ./../../../db/sql/create_address_schemas.sql:/docker-entrypoint-initdb.d/create_address_schemas.sql
       - ./../../../db/sql/states.sql:/docker-entrypoint-initdb.d/states.sql
       - ./../../../db/sql/zips.sql:/docker-entrypoint-initdb.d/zips.sql
 volumes:
-  db:
+  address:
     driver: local

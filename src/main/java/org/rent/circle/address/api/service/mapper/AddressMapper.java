@@ -3,11 +3,12 @@ package org.rent.circle.address.api.service.mapper;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 import org.rent.circle.address.api.persistence.model.Address;
 import org.rent.circle.address.dto.runtime.AddressDto;
 import org.rent.circle.address.dto.runtime.SaveAddressDto;
 
-@Mapper(componentModel = "cdi")
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "cdi")
 public interface AddressMapper {
 
     Address toModel(SaveAddressDto saveAddressDto);
