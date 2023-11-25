@@ -1,5 +1,6 @@
 package org.rent.circle.address.api.resource;
 
+import io.quarkus.security.Authenticated;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -18,6 +19,7 @@ import org.rent.circle.address.dto.runtime.AddressDto;
 import org.rent.circle.address.dto.runtime.SaveAddressDto;
 
 @AllArgsConstructor
+@Authenticated
 @Path("/address")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)

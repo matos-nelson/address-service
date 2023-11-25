@@ -13,12 +13,14 @@ import io.restassured.common.mapper.TypeRef;
 import java.util.List;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
+import org.rent.circle.address.api.annotation.AuthUser;
 import org.rent.circle.address.dto.runtime.AddressDto;
 import org.rent.circle.address.dto.runtime.SaveAddressDto;
 
 @QuarkusTest
 @TestHTTPEndpoint(AddressResource.class)
 @QuarkusTestResource(H2DatabaseTestResource.class)
+@AuthUser
 public class AddressResourceTest {
 
     @Test
